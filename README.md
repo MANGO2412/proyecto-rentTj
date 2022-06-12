@@ -35,13 +35,13 @@ este programa debe estar desarrollado en java, utilizando el paridigma de la pro
              
        2.4)analizar el codigo 
        
-  4)desarrollar el logo:
+  3)desarrollar el logo:
   
        4.1)seleccionar un logo de los tres borradores(asunto grupal)
        4.2)seleccionar los colores(asunto grupal)
        4.3)hacer  el logo en ilustrador(asunto grupal)
       
-  5)conexion de la red con  el programa:
+  4)conexion de la red con  el programa:
   
       5.1)no  hay informacion
 
