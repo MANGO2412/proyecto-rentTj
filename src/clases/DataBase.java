@@ -1,6 +1,8 @@
 package src.clases;
 import java.sql.*;
 
+
+//class database
 public class DataBase{
      public String url;
      public String userName;
@@ -14,7 +16,7 @@ public class DataBase{
      }
    
      
-     //method getConnection
+     //method getConnection for the programer  can have to connection with database 
     public Connection getConnection(){
         Connection con = null;
          
@@ -43,6 +45,20 @@ public class DataBase{
        
         return resultSet;
        
+    }
+
+
+    public void updateData(String command){
+       try {
+          Connection con = getConnection();
+          Statement statement = con.createStatement();
+          statement.executeUpdate(command);
+         
+          con.close();
+          statement.close();
+       } catch (SQLException e) {
+          System.out.println(e);
+       }         
     }
  
 }
