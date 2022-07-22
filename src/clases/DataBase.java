@@ -10,7 +10,7 @@ public class DataBase{
 
      //constructor
      public DataBase(){
-       url = "jdbc:mysql://localhost:3306/rentaEquipos";
+       url = "jdbc:mysql://localhost:3306/bar2c";
        userName = "root";
        password = "";  
      }
