@@ -1,12 +1,12 @@
 package src.clases;
+import java.util.Scanner;
 import java.sql.*;
-
-import com.mysql.cj.callback.UsernameCallback;
-
+//import com.mysql.cj.callback.UsernameCallback;
 import src.clases.*;
 
 public class Cliente extends User{
     //conecction wuth database
+    Scanner in = new Scanner(System.in);
     DataBase rentaEquipos = new DataBase();
     
     int id;
@@ -31,7 +31,11 @@ public class Cliente extends User{
       return apell_paterno;
     }
      
+   public String getNumTel(){
+    return numTel;
+   }
 
+   //other methods
     public  void printState(){
         System.out.println(nombre);
     }  
@@ -45,6 +49,21 @@ public class Cliente extends User{
       }
 
       void deleteRental(){
+
+      }
+
+
+      //later
+      public void printInformation(){
+        System.out.println("+---------informacion de la cuenta----------+");
+        System.out.println("|>nombre de usuario:"+super.getuserName().trim()+". ");
+        System.out.println("|>Nombre:"+getNombre().trim()+",                    ");
+        System.out.println("|>apellido:"+getApell().trim()+",                   ");
+        System.out.println("|>Numero de telefono:"+ getNumTel().trim()+".");
+        System.out.println("+--------------------------------------------+");       
+      }
+
+      void changeInformation(){
 
       }
    

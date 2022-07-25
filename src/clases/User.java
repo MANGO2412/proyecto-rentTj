@@ -1,6 +1,7 @@
 package src.clases;
 import java.sql.*;
 import src.clases.*;
+import javax.swing.JOptionPane;
 
 
 public class User {
@@ -17,7 +18,11 @@ public class User {
   public  User(String userName,String password){
         this.userName = userName;
         this.password = password;
+        this.tipo = validateUser(userName,password);
    }
+
+
+
 
   public  String getuserName(){
     return userName;
@@ -29,25 +34,37 @@ public class User {
 
 
   //method to login
-  public  void log(){
-    try {
-      String com = "select * from users where username='"+userName+"'"+"AND"+" password='"+password+"';";
-      ResultSet resultSet = rentaEquipos.getTableResults(com);
+   String validateUser(String usernameV,String passwordV){
+     tipo = null;
+    try{
+      String command = "select *from users where username='"+usernameV+"' and"+" password='"+passwordV+"'";
+      ResultSet resultSet= rentaEquipos.getTableResults(command);
+
       while (resultSet.next()) {
-
-        id = resultSet.getInt("id_user");
-        tipo =resultSet.getString("tipo").trim();
-        no_cliente =resultSet.getInt("cliente");
-        no_empleado = resultSet.getInt("cliente");     
+        if(this.userName.equals(resultSet.getString("username"))){
+          tipo=resultSet.getString("tipo"); 
+          id = resultSet.getInt("id_user");
+          no_cliente = resultSet.getInt("cliente");
+          no_empleado = resultSet.getInt("empleado");
+        }
       }
-    
+    }catch(Exception e){
+        e.printStackTrace();
+    }
+    return tipo;
+   }
 
-      // resultSet.close();
-    } catch (Exception e) {
-       e.printStackTrace();
-    }      
- }
 
+  public boolean log(){
+      boolean found = false;
+      if(getTipo()!= null){
+         found = true;
+       }else{
+        JOptionPane.showMessageDialog(null, "La contraseña o nombre de  usario es incorrecto vulve intentarlo.\n registrate si no cuentas con una cuenta. Si estas iniciando sesion como un empleado, \n notifica al departamento de informatica el porblema.");
+       }      
+       return found;
+  } 
+  
   public Cliente getCustomer(){
      Cliente customer = null;
 
@@ -60,14 +77,13 @@ public class User {
         ResultSet resultSet = rentaEquipos.getTableResults(com);
         while (resultSet.next()) {
           idCustomer = resultSet.getInt("ID_cliente");
-          nameCustomer = resultSet.getString("nombre");
-          apellCustomer = resultSet.getString("apell_paterno");
-          numTelCUstomer = resultSet.getString("num_tel");
+          nameCustomer = resultSet.getString("nombre").trim();
+          apellCustomer = resultSet.getString("apell_paterno").trim();
+          numTelCUstomer = resultSet.getString("num_tel").trim();
         }        
 
        
       } catch (SQLException e) {
-        //TODO: handle exception
         e.printStackTrace();;
       }
     

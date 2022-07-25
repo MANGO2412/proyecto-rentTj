@@ -1,16 +1,13 @@
 package src;
-import java.sql.*;
 import java.util.*;
-
-import com.mysql.cj.protocol.Message;
 import src.clases.*;
-
+import javax.swing.JOptionPane;
 
 
 public class application{
-  /*metodos de consola */
-  
-  //limpia la consola
+/*metodos de consola */
+//--------------------------------------------------------------------------------------------------    
+//limpia la consola
   static void  clear(){
     System.out.print("\033[H\033[2J");  
     System.out.flush(); 
@@ -20,8 +17,29 @@ public class application{
   static void stop(){
     System.exit(0);
   }
-  
-   //metodo para imprimir el menu de login
+
+  //validar numeros
+  static  int  validOption(){
+    Scanner in = new Scanner(System.in);
+    int num = 0;
+    boolean skip = false;
+    do {
+       try {
+        num = in.nextInt();
+        skip = true;
+       } catch (Exception e) {
+         System.out.println("inserta la opcion en numero por favor >:(");
+         in.nextLine();
+
+       }     
+    } while (skip == false);
+
+    return num;
+  }
+ //-------------------------------------------------------------------------------------------------
+
+  /*metodo para imprimir el menu de login*/
+
     static User  logMessage(){
       //objetos  para el metodo
       User user = null;
@@ -30,57 +48,46 @@ public class application{
       //datos de inicio para el metodo
       String username;
       String  contrasena;
-      
-
       int option;
+      //loop of menu
+     do {
+       System.out.println("*-------------BIENVENIDO A RENT-TJ----------------*");
+       System.out.println("|1) Iniciar sesion                                |");
+       System.out.println("|2) Registrarse como cliente, si no tiene cuenta. |");
+       System.out.println("|3) Salir del programa                            |");
+       System.out.println("*-------------------------------------------------*");
+       System.out.println("Escribe una opcion del menu");
+       System.out.print("/>");option = validOption();
+       clear();
 
-
-    do {
-      System.out.println("*-------------BIENVENIDO A RENT-TJ----------------*");
-      System.out.println("|1) Iniciar sesion                                |");
-      System.out.println("|2) Registrarse como cliente, si no tiene cuenta. |");
-      System.out.println("|3) Salir del programa                            |");
-      System.out.println("*-------------------------------------------------*");
-      System.out.println("Escribe una opcion del menu");
-      System.out.print("/>");option = in.nextInt();
-      clear();   
-      
-      
-      switch (option) {
-        case 1:
-          System.out.println("Escribe tu usuario"); username = in.next();
-          System.out.println("Escribe tu cuntraseña"); contrasena = in.next();
-          
-          user = new User(username,contrasena);
-          user.log();
-          break;
+       if(option == 1){
+         System.out.println("Escribe tu usuario:"); username = in.next();
+         System.out.println("Escribe tu cuntraseña:"); contrasena = in.next();
+                
+         user = new User(username,contrasena);
+         if(user.log()== true)
+           break;
         
+        clear();
+       }else if(option == 3){
+         clear();
+         System.out.println("Gracias por visitar nuestro programa usuario :)");
+         stop(); 
+       }else{
+        JOptionPane.showMessageDialog(null, "La opcion que escribiste es incorrecta :("); 
+        clear();
+       }
       
-        default:
-          break;
-      }
+    } while (true);
+    
+    
+     return user;
+  }
+//--------------------------------------------------------------------------------------------------
 
-      if( user.getTipo() != null){
-        break;
-      }else if(option != 3 || user.getTipo() == null){
-        System.out.println("*--------------------------------ERROR AL INICIAR SESION :(------------------------------------------------");
-        System.out.println("|>La contraseña o nombre de  usario es incorrecto vulve intentarlo, registrate si no cuentas con una cuenta.");
-        System.out.println("|>Si esta iniciando sesion como un empleado, \n notifica al departamento de informatica para resaolver el problema.");
-        System.out.println("*-----------------------------------------------------------------------------------------------------------*\n");
-      }
-           
-    } while (option!=3);
-
-    if(option == 3){
-      clear();
-      System.out.println("gracias por visitar nuestro programa usuario :)");
-      stop();
-    }
-
-    return user;
-    }
 
    /*application  of the rental*/
+//---------------------------------------------------------------------------------------------------   
    //mensage  para el input
    static void inputM(String message,String inpuot){
       System.out.println(message);
@@ -93,7 +100,7 @@ public class application{
       System.out.println("|1)mostra  equipos de renta.         |");
       System.out.println("|2)mostrar las rentas generadas      |");
       System.out.println("|3)crear una renta                   |");
-      System.out.println("|4)configuraraciones  de tu cuenta   |");
+      System.out.println("|4)Mostrar informacion del cuenta    |");
       System.out.println("|5)salir                             |");
       System.out.println("|____________________________________|");
       inputM("Escribe la opcion", nameUser+"/>");   
@@ -101,26 +108,40 @@ public class application{
 
    //programa para el cliente
    static  void appRenal(Cliente usuario){
+     Catalogo catalogo = new Catalogo();
      Cliente cliente = usuario;
      Scanner in = new Scanner(System.in);
      int option;
      
      do {
       menuRental(cliente.getNombre(),cliente.getApell(),cliente.getuserName());
-      option = in.nextInt();
-     } while (option != 5);
+      option = validOption();
+       switch (option) {
+         case 1:clear(); catalogo.getEquipments();  catalogo.printEquipments();;break;
+         case 2:clear(); System.out.println("no tienes ninguna renta generada");break;
+         case 3:clear(); System.out.println("no puedes crear rentas"); break;
+         case 4:
+           clear();
+           cliente.printInformation(); 
+            break;
+         case 5:  
+            clear();
+            System.out.println("------->Hasta pronto "+cliente.getNombre()+" "+cliente.getApell()+"!>|<!");
+            stop();    
+          break;
+         default:JOptionPane.showMessageDialog(null, "la opcion que escribiste es incorrecta :("); clear(); break;
+       }
 
-    if(option == 5){
-      clear();
-      System.out.println("hasta pronto "+cliente.getNombre()+" "+cliente.getApell());
-      stop();
-    }
+     } while (true);    
    }
+
+//----------------------------------------------------------------------------------------------------------------------
     
     
     
     public static void  main(String[] args){
       //ejecucion de los metodos estaticos
+
       try {
        //creacion del objeto tipoUser
         User  tipoUser = logMessage();
@@ -131,7 +152,7 @@ public class application{
         }else{
            System.out.println("se ejecuto cuenta de empleado");
         } 
-      } catch (Exception e) { System.out.println("gracias por visitar nuestro programa usuario :)");}
+      } catch (Exception e) { System.out.println(e);}
        
     }
 }
