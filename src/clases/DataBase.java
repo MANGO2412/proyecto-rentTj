@@ -48,7 +48,7 @@ public class DataBase{
     }
 
 
-    public void updateData(String command){
+    public void insertData(String command){
        try {
           Connection con = getConnection();
           Statement statement = con.createStatement();

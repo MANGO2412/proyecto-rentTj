@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 
  class Equipment{
     //attributes
+    DataBase rentaEquipos;
     int id,inventario;
     String nombre,descr;
     double preciBase;
@@ -16,6 +17,7 @@ import java.sql.ResultSet;
        this.nombre = nombre;
        this.descr = descr;
        this.preciBase = preciBase;
+       rentaEquipos = new DataBase();
     }
 
     //methods get
@@ -40,6 +42,24 @@ import java.sql.ResultSet;
     return preciBase;
     }
 
+
+    //methods set
+    public void setName(String nombre){
+       this.nombre = nombre;
+      
+       rentaEquipos.insertData("update equipos set nombre='"+this.nombre+"' where id_equipo="+getId());
+    }
+
+    public void setPrecioBase(double preciBase){
+        this.preciBase = preciBase;
+        rentaEquipos.insertData("update equipos set precio_base='"+this.preciBase+"' where id_equipo="+getId());
+    }
+    
+    public void setDescr(String descr){
+      this.descr = descr;
+      rentaEquipos.insertData("update equipos set descripcion='"+this.descr+"' where id_equipo="+getId());
+    }
+
 }
 
 public class Catalogo{
@@ -53,7 +73,7 @@ public class Catalogo{
       count = 0;
    }
 
- public void getEquipments(){
+   void storeEquipments(){
     int codeEquip = 0,numInvent = 0;
     String nameEquip = null,  descrEquip = null;
     double precioBase = 0.0D;
@@ -76,13 +96,33 @@ public class Catalogo{
         System.out.println("en el archivo Catalogo en la linea 62  "+e);
       }  
    }
+
    
    public void printEquipments(){
+      storeEquipments();
       for (int i = 0; i < count; i++) {
-           System.out.println(equipments.get(i).getDescr());
+
+         System.out.printf("+-------------------------+%n");
+         System.out.printf("|%-25s|%n", equipments.get(i).getNombre());
+         System.out.printf("+-------------------------+%n%n");
+         System.out.println(">id: "+equipments.get(i).getId());
+         System.out.println(">Precio por dia: "+equipments.get(i).getPreciBas()+"\n");
+         System.out.println(">Descripcion: "+ equipments.get(i).getDescr());
+         System.out.println("\n\n");
       }
    }
 
+   public Equipment getEquipment(int idV,String name){        
+      Equipment user = null;
+     for (int i = 0; i < count; i++) {
+       if(equipments.get(i).getId() == idV || equipments.get(i).getNombre() == name){
+          user =  equipments.get(i);
+          break;
+       }
+     }
+
+     return user;
+   }
 
 }
 
