@@ -1,0 +1,113 @@
+create database rentaEquipos;
+use rentaEquipos;
+
+------------- Tabla de clientes
+create table clientes(
+        ID_cliente  mediumint primary key,
+        nombre varchar(40) not null,
+        apell_paterno varchar(40) not null,
+        num_tel  char(10) not null
+);
+
+
+------------Tabla  empleado
+create table  empleados(
+    id_empleado mediumint primary key ,
+    nombre varchar(20) not null,
+    apellid_pat varchar(40) not null,
+    numeroTelefono char(10) not null
+);
+
+create table  users(
+  id_user smallint primary key auto_increment,
+  tipo varchar(20) not null,
+  username varchar(20) not null,
+  password varchar(12) not null,
+  empleado mediumint,
+  cliente mediumint
+);
+
+alter table users
+add foreign key fk_users_empleado(empleado)
+references empleados(id_empleado);
+
+alter table users
+add foreign key fk_users_cliente(cliente)
+references  clientes(ID_cliente);
+
+
+
+-------------Tabla de rentas
+create table rentas(
+  id_renta smallint primary key,
+   id_cliente mediumint not null,
+  fecha_entr  time not null,
+  fecha_dev   time not null,
+  importe double not null ,
+  direccion varchar (100) not null,
+  cantid_pago  double  not null,
+  estado  varchar(10) not null,
+  Fecha_Hora_reg datetime not null
+);
+
+--------------FK Rentas-Clientes
+alter table rentas
+add  foreign key fk_rentas_clieness(id_cliente)
+references clientes(ID_cliente);
+
+
+
+
+---------------Tabla Inventarios
+create table inventarios(
+      id_inv smallint primary key,
+      cant_disp smallint,
+     cant_rent smallint,
+     total smallint not null,
+     last_update  datetime not null
+);
+
+
+
+
+---------------Tabla Equipos
+create table equipos(
+   id_equipo smallint  primary key,
+   inventario smallint not null,
+   nombre varchar(60) not null,
+   descripcion varchar(200) not null,
+   precio_base decimal(6,4) not null
+);
+
+
+--------------FK Equipos-Inventarios
+alter table equipos
+  add foreign key fk_equip_invent(inventario)
+  references inventarios(id_inv);
+
+
+-------------Tabla Renta Equipo
+create table rent_equip(
+     id_rent_equip smallint primary key,
+     id_renta smallint not null,
+     id_equip smallint not null,
+     cant_ped smallint not null,
+     precio_base double  not null,
+     importe_equipo double not null     
+);
+--------------FK RentaEquipo-Rentas 
+alter table rent_equip
+add foreign key fk_renta(id_renta)
+references rentas(id_renta);
+
+
+--------------FK RentaEquipo-Equipos
+alter table rent_equip
+add foreign key fk_equipo(id_equip)
+references equipos(id_equipo);
+
+
+
+
+
+

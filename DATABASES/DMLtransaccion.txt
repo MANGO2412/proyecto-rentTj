@@ -1,0 +1,7 @@
+comprobar si el cliente esta registrado 
+
+"select * from users where username='"+userName+"'"+"AND"+" password='"+password+"';"
+
+
+Obtener sus datos del cliente
+SELECT *from clientes,users where users.id_user = 1 and clientes.ID_cliente = users.cliente;

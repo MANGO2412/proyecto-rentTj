@@ -1,0 +1,109 @@
+-----tabla clientes
+insert into clientes(nombre,apell_paterno,num_tel) values('Alonso','Reyes','6641644270');
+insert into clientes(nombre,apell_paterno,num_tel) values('Ramses','Benitez','6645199834');
+
+32 => empleado
+----tabla empleados
+insert into empleados  values(321,'Manuel','Gomez','6641234546');
+insert into empleados  values(322,'Emilio','Velazquez','6641102345');
+insert into empleados  values(323,'Allan','Salazar','6641233456');
+
+----tabla users
+insert into users(tipo,username,password,empleado) values('empleado','0321','@rmando1023%',321);
+insert into users(tipo,username,password,empleado) values('empleado','0322','Mich3ll32003',322);
+insert into users(tipo,username,password,empleado) values('empleado','0323','coeazon12Lov',323);
+
+insert into users(tipo,username,password,cliente) values('cliente','Gamer12','limaLimon123',1800);
+insert into users(tipo,username,password,cliente) values('cliente','steve12','chessManzana',1801);
+
+
+
+
+101n => invenatio
+
+carpas 
+id 1010
+total 900
+
+----table inventario
+insert into inventarios(id_inv,total,last_update) values(1010,900,now());
+
+-----table equipo
+insert into equipos values(1,1010,'carpa toldo max','carpa para eventos toldo max color blanco , alcanza una altura de 2.90 metros x 3.05 m de ancho y 6.10 m profundidad.el precio  es renta por dia',500);
+
+
+mesas
+id 1011
+total 1000
+
+----table inventario
+insert into inventarios(id_inv,total,last_update) values(1011,1000,now());
+
+----table equipos
+insert into equipos values(2,1011,'mesa','mesa desplegable de 96x30 color blanca renta por dia',100);
+
+
+
+sillas
+id 1012
+total 1000
+----table inventario
+insert into inventarios(id_inv,total,last_update) values(1012,1000,now());
+
+----table equipos
+insert into equipos values(3,1012,'silla','silla color blanco renta por dia',30);
+
+
+
+brincolin
+id 1013
+total 500
+
+----table inventario
+insert into inventarios(id_inv,total,last_update) values(1013,500,now());
+
+
+----table equipos
+insert into equipos values(4,1013,'brincolin','brincolin de 3x4 metros de colores mixtos renta por dia',300);
+
+
+
+
+
+bocinas  Sx100+ / ELECTRO VOICE
+id 1014
+total 300
+
+----table inventario
+insert into inventarios(id_inv,total,last_update) values(1014,300,now());
+
+
+----table equipos
+insert into equipos values(5,1014,'bocina electro voice','Par de altavoz de dos vías 12 pulgadas + driver de compresión de titanio, potencia: 200 watts programa, entradas en jack de ¼ pulgada en paralelo, caja construida en plástico negro, con orificio en la parte inferior para montarse en base, medidas: 320 x 580 x 420 mm. peso: 14.5 kg. renta por dia',500);
+
+
+microfonos
+id 1015
+total 400
+
+----table inventario
+insert into inventarios(id_inv,total,last_update) values(1015,400,now());
+
+----table equipos
+insert into equipos values(6,1015,'microfono','Micrófono de mano, color gris obscuro, con rejilla protectora y wind screen, tipo de conector: XLR macho, con cable.',65);
+
+
+
+
+calentador
+id 1016
+total 900
+
+----table inventario
+insert into inventarios(id_inv,total,last_update) values(1016,900,now());
+
+
+----table equipos
+insert into equipos values(7,1016,'calentador','calentador para areas amplias de gas color gris oscuro',500);
+
+
