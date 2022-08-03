@@ -53,7 +53,7 @@ public class User {
      tipo = null;
     try{
       String command = "select *from users where username='"+usernameV+"' and"+" password='"+passwordV+"'";
-      ResultSet resultSet= rentaEquipos.getTableResults(command);
+      ResultSet resultSet= rentaEquipos.getData(command);
 
       while (resultSet.next()) {
         if(this.userName.equals(resultSet.getString("username"))){
@@ -96,7 +96,7 @@ public class User {
 
       try {
         String com = "SELECT *from clientes,users where users.id_user="+id +" and clientes.ID_cliente ="+no_cliente +";";
-        ResultSet resultSet = rentaEquipos.getTableResults(com);
+        ResultSet resultSet = rentaEquipos.getData(com);
         while (resultSet.next()) {
           idCustomer = resultSet.getInt("ID_cliente");
           nameCustomer = resultSet.getString("nombre").trim();
@@ -120,7 +120,7 @@ public class User {
     do {
       answer = in.next();
       try {
-        ResultSet resultSet= rentaEquipos.getTableResults("select username from users");
+        ResultSet resultSet= rentaEquipos.getData("select username from users");
         
         while (resultSet.next()) {
            if(answer.equals(resultSet.getString("username"))){
@@ -143,11 +143,11 @@ public class User {
     String answer; 
      do {
       answer = in.next();
-       if(answer.length() ==12)
+       if(answer.length() ==8)
           break;
         else{
-          System.out.println("tu contraseña no tiene 12 caracteres por tiene: "+answer.length());
-          System.out.println("vuelve a escribir otra o gregale mas caracters");
+          System.out.println("tu contraseña no tiene 8 caracteres porque  tiene: "+answer.length());
+          System.out.println("vuelve a escribir otra o gregale mas caracters o quitale caracters :)");
           answer = "";
         }
      } while (answer.equals(""));
@@ -167,18 +167,18 @@ public class User {
           if(tamano.length() == 10){
             skip = true;
           }else{
-            System.out.println("tu numero de telefono debe de ser de 12 digitos");
+            System.out.println("tu numero de telefono debe de ser de 10 digitos");
           }
           
         } catch (Exception e) {
-          System.out.println("inserte el numero de telefono en numero por favor >:(");
+          System.out.println("inserte el numero de telefono en numeros por favor >:(");
           in.nextLine();
         }
       } while (skip == false);
 
       answer+= num;
       try {
-        ResultSet resultSet= rentaEquipos.getTableResults("select num_tel from clientes");
+        ResultSet resultSet= rentaEquipos.getData("select num_tel from clientes");
         
         while (resultSet.next()) {
            if(answer.equals(resultSet.getString("num_tel"))){
@@ -203,10 +203,10 @@ public class User {
   
 
     int getLastIdUser(){
-      int id_User = 0;
+      int id_User = 1;
       try {
        String  com = "SELECT id_user from users";
-       ResultSet resultSet = rentaEquipos.getTableResults(com);
+       ResultSet resultSet = rentaEquipos.getData(com);
        
        while (resultSet.next()) {
           if(resultSet.getInt("id_user") > id_User){
@@ -215,7 +215,7 @@ public class User {
         }
       } catch (Exception e) {
         // TODO: handle exception
-        System.out.println("erroro en la linea 170 en la clase cliente"+e);
+        System.out.println("error en la linea 170 en la clase cliente"+e);
       }
      
       id_User = id_User+1;
@@ -223,11 +223,7 @@ public class User {
     }
 
    void register(String cmmd){
-         try {
-           rentaEquipos.insertData(cmmd);
-         } catch (Exception e) {
-            System.out.println("error en la linea 181 en la clase user"+e);
-         }
+      rentaEquipos.setData(cmmd);     
    };
 
 
@@ -244,7 +240,7 @@ public class User {
 
      try {
        String com = "SELECT *from empleados,users where users.id_user="+id +" and empleados.id_empleado ="+no_empleado +";";
-       ResultSet resultSet = rentaEquipos.getTableResults(com);
+       ResultSet resultSet = rentaEquipos.getData(com);
        while (resultSet.next()) {
          idEmployer = resultSet.getInt("id_empleado");
          nameEmployer = resultSet.getString("nombre").trim();
@@ -254,7 +250,8 @@ public class User {
 
       
      } catch (SQLException e) {
-       e.printStackTrace();
+       //e.printStackTrace();
+       System.out.println("el usuario no se encontro");
      }
 
      

@@ -31,7 +31,7 @@ public class DataBase{
     }
 
       //methood getTable
-     public ResultSet getTableResults(String command){
+     public ResultSet getData(String command){
         ResultSet resultSet = null;
 
         try {
@@ -48,7 +48,7 @@ public class DataBase{
     }
 
 
-    public void insertData(String command){
+    public void setData(String command){
        try {
           Connection con = getConnection();
           Statement statement = con.createStatement();
@@ -58,6 +58,7 @@ public class DataBase{
           statement.close();
        } catch (SQLException e) {
           System.out.println(e);
+
        }         
     }
  

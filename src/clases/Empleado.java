@@ -59,7 +59,7 @@ public class Empleado extends User {
     int getInvetory(){
       int mayorId = 0;  
     try {
-       ResultSet resultSet = rentaEquipos.getTableResults("select id_inv from inventarios");
+       ResultSet resultSet = rentaEquipos.getData("select id_inv from inventarios");
        while (resultSet.next()) {
         if(resultSet.getInt("id_inv")>mayorId)
              mayorId = resultSet.getInt("id_inv");
@@ -75,7 +75,7 @@ public class Empleado extends User {
     int getIdEqu(){
         int mayorId = 0;  
       try {
-         ResultSet resultSet = rentaEquipos.getTableResults("select id_equipo from equipos");
+         ResultSet resultSet = rentaEquipos.getData("select id_equipo from equipos");
          while (resultSet.next()) {
           if(resultSet.getInt("id_equipo")>mayorId)
                mayorId = resultSet.getInt("id_equipo");
@@ -101,15 +101,13 @@ public class Empleado extends User {
         double priceBase = in.nextDouble();
 
         int idInventario = getInvetory();
-       try {
-         rentaEquipos.insertData("insert into inventarios(id_inv,total,last_update) values("+idInventario+","+total+",now());");
+       
+         rentaEquipos.setData("insert into inventarios(id_inv,total,last_update) values("+idInventario+","+total+",now());");
           
          String cmm = "insert into equipos values("+getIdEqu()+","+idInventario+",'"+name+"','"+desc+"',"+priceBase+")";
-         rentaEquipos.insertData(cmm);       
+         rentaEquipos.setData(cmm);       
 
-       } catch (Exception e) {
-          System.out.println(e);
-       }    
+           
      }
 
 
@@ -123,14 +121,14 @@ public class Empleado extends User {
         clear();
         //print catology
         Catalogo catalogo = new Catalogo();
-        catalogo.printEquipments();
+        //catalogo.printEquipments();
 
         //
         do {
          System.out.println("escribe el id del equipo para cambiar los datos");
          int idEquipo = in.nextInt();
     
-         Equipment equipment = catalogo.getEquipment(idEquipo,null);
+         Equipment equipment = catalogo.getEquipment(idEquipo,null,0);
          if(equipment != null){
              int optionN;
              do {

@@ -22,7 +22,7 @@ create table  users(
   id_user smallint primary key auto_increment,
   tipo varchar(20) not null,
   username varchar(20) not null,
-  password varchar(12) not null,
+  password varchar(10) not null,
   empleado mediumint,
   cliente mediumint
 );
@@ -39,14 +39,15 @@ references  clientes(ID_cliente);
 
 -------------Tabla de rentas
 create table rentas(
-  id_renta smallint primary key,
-   id_cliente mediumint not null,
+  id_renta int primary key,
+  id_cliente mediumint not null,
   fecha_entr  time not null,
   fecha_dev   time not null,
   importe double not null ,
   direccion varchar (100) not null,
-  cantid_pago  double  not null,
+  cantid_pago  double ,
   estado  varchar(10) not null,
+  dias_renta smallint not null,
   Fecha_Hora_reg datetime not null
 );
 
@@ -60,8 +61,8 @@ references clientes(ID_cliente);
 
 ---------------Tabla Inventarios
 create table inventarios(
-      id_inv smallint primary key,
-      cant_disp smallint,
+    id_inv smallint primary key,
+     cant_disp smallint,
      cant_rent smallint,
      total smallint not null,
      last_update  datetime not null
@@ -88,12 +89,12 @@ alter table equipos
 
 -------------Tabla Renta Equipo
 create table rent_equip(
-     id_rent_equip smallint primary key,
-     id_renta smallint not null,
+     id_rent_equip int primary key,
+     id_renta int not null,
      id_equip smallint not null,
      cant_ped smallint not null,
      precio_base double  not null,
-     importe_equipo double not null     
+     importe_per_amount double not null    
 );
 --------------FK RentaEquipo-Rentas 
 alter table rent_equip
