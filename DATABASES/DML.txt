@@ -1,6 +1,6 @@
 -----tabla clientes
-insert into clientes(nombre,apell_paterno,num_tel) values('Alonso','Reyes','6641644270');
-insert into clientes(nombre,apell_paterno,num_tel) values('Ramses','Benitez','6645199834');
+insert into clientes(ID_cliente,nombre,apell_paterno,num_tel) values(1801,'Alonso','Reyes','6641644270');
+insert into clientes(ID_cliente,nombre,apell_paterno,num_tel) values(1802,'Ramses','Benitez','6645199834');
 
 32 => empleado
 ----tabla empleados
@@ -9,12 +9,12 @@ insert into empleados  values(322,'Emilio','Velazquez','6641102345');
 insert into empleados  values(323,'Allan','Salazar','6641233456');
 
 ----tabla users
-insert into users(tipo,username,password,empleado) values('empleado','0321','@rmando1023%',321);
-insert into users(tipo,username,password,empleado) values('empleado','0322','Mich3ll32003',322);
-insert into users(tipo,username,password,empleado) values('empleado','0323','coeazon12Lov',323);
+insert into users(tipo,username,password,empleado) values('empleado','0321','angel123',321);
+insert into users(tipo,username,password,empleado) values('empleado','0322','Mich3ll3',322);
+insert into users(tipo,username,password,empleado) values('empleado','0323','kevin123',323);
 
-insert into users(tipo,username,password,cliente) values('cliente','Gamer12','limaLimon123',1800);
-insert into users(tipo,username,password,cliente) values('cliente','steve12','chessManzana',1801);
+insert into users(tipo,username,password,cliente) values('cliente','Gamer12','lima123%',1801);
+insert into users(tipo,username,password,cliente) values('cliente','steve12','chessMan',1802);
 
 
 
