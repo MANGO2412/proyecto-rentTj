@@ -217,9 +217,9 @@ public class Cliente extends User{
     }
 
   public void register(){
-      System.out.println("Escribe tu nombre");String  nombreNew = in.next();
+      System.out.println("Escribe tu nombre");String  nombreNew = con.validateStrinUnNull(console.readLine(), "no dejes vacio este input");
 
-      System.out.println("Escribe tu apellido paterno");String apell_paternoNew = in.next();
+      System.out.println("Escribe tu apellido paterno");String apell_paternoNew = con.validateStrinUnNull(console.readLine(), "no dejes vacio este input");
 
       System.out.println("Escribe tu telefono");
       String numTelNew = validateNumTel();
