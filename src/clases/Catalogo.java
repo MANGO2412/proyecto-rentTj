@@ -1,5 +1,4 @@
 package src.clases;
-import  src.clases.DataBase;
 import java.util.ArrayList;
 import java.sql.ResultSet;
 
@@ -179,9 +178,8 @@ public class Catalogo{
          System.out.printf("|%-25s|%n", equipments.get(index).getNombre());
          System.out.printf("+-------------------------+%n%n");
          System.out.println(">id: "+equipments.get(index).getId());
-         System.out.println(">Precio por dia: "+equipments.get(index).getPreciBas()+"\n");
+         System.out.println(">Precio: "+equipments.get(index).getPreciBas()+"\n");
          System.out.println(">Descripcion: "+ equipments.get(index).getDescr());
-         System.out.print(equipments.get(index).getInventario());
          System.out.println("\n\n");
       }
 
@@ -208,9 +206,9 @@ public class Catalogo{
         if(rs.getInt("id_rent_equip")>idRentEquip){
           idRentEquip = rs.getInt("id_rent_equip");
         }
-        idRentEquip = idRentEquip +1;
        }
     } catch (Exception e) {System.out.println(e); }
+    idRentEquip = idRentEquip + 1;
     return idRentEquip;
    }
 

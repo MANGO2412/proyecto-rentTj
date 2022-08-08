@@ -42,7 +42,7 @@ public class console {
             num = Integer.parseInt(value);
           } catch (Exception e) {
             System.out.println(message); 
-            value = console.readLine();
+            value = console.readLine().trim();
             confirm = false;           
           }
          } while (confirm == false);
@@ -65,6 +65,7 @@ public class console {
       } while (confirm == false);  
       return value;
     }
+
     
     public String validatScannerNext(String message, String meessageError){
         boolean anyError;
@@ -84,6 +85,24 @@ public class console {
          } while (anyError == false);
       
      return answer;
+    }
+
+
+   public String validatOptionSINO(){
+      boolean confirm;
+      String answer;
+
+      do {
+         confirm = false;
+         answer = console.readLine();
+         if(answer.equals("si")  || answer.equals("no"))
+          confirm = true;
+         else
+           System.out.println("Escribe unicamente  si o no por favor");
+         
+      } while (confirm == false);
+       
+      return answer;
     }
     
 }

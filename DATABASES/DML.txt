@@ -29,8 +29,7 @@ total 900
 insert into inventarios(id_inv,total,last_update) values(1010,900,now());
 
 -----table equipo
-insert into equipos values(1,1010,'carpa toldo max','carpa para eventos toldo max color blanco , alcanza una altura de 2.90 metros x 3.05 m de ancho y 6.10 m profundidad.el precio  es renta por dia',500);
-
+insert into equipos values(1,1010,'carpa toldo max','carpa para eventos toldo max color blanco , alcanza una altura de 2.90 metros x 3.05 m de ancho y 6.10 m profundidad.',500);
 
 mesas
 id 1011
@@ -40,7 +39,7 @@ total 1000
 insert into inventarios(id_inv,total,last_update) values(1011,1000,now());
 
 ----table equipos
-insert into equipos values(2,1011,'mesa','mesa desplegable de 96x30 color blanca renta por dia',100);
+insert into equipos values(2,1011,'mesa','mesa desplegable de 96x30 color blanca',100);
 
 
 
@@ -51,7 +50,7 @@ total 1000
 insert into inventarios(id_inv,total,last_update) values(1012,1000,now());
 
 ----table equipos
-insert into equipos values(3,1012,'silla','silla color blanco renta por dia',30);
+insert into equipos values(3,1012,'silla','silla color blanco',30);
 
 
 
@@ -64,7 +63,7 @@ insert into inventarios(id_inv,total,last_update) values(1013,500,now());
 
 
 ----table equipos
-insert into equipos values(4,1013,'brincolin','brincolin de 3x4 metros de colores mixtos renta por dia',300);
+insert into equipos values(4,1013,'brincolin','brincolin de 3x4 metros de colores mixtos',300);
 
 
 
@@ -79,7 +78,7 @@ insert into inventarios(id_inv,total,last_update) values(1014,300,now());
 
 
 ----table equipos
-insert into equipos values(5,1014,'bocina electro voice','Par de altavoz de dos vías 12 pulgadas + driver de compresión de titanio, potencia: 200 watts programa, entradas en jack de ¼ pulgada en paralelo, caja construida en plástico negro, con orificio en la parte inferior para montarse en base, medidas: 320 x 580 x 420 mm. peso: 14.5 kg. renta por dia',500);
+insert into equipos values(5,1014,'bocina electro voice','Par de altavoz de dos vías 12 pulgadas + driver de compresión de titanio, potencia: 200 watts programa, entradas en jack de ¼ pulgada en paralelo, caja construida en plástico negro, con orificio en la parte inferior para montarse en base, medidas: 320 x 580 x 420 mm. peso: 14.5 kg.',500);
 
 
 microfonos
@@ -107,3 +106,37 @@ insert into inventarios(id_inv,total,last_update) values(1016,900,now());
 insert into equipos values(7,1016,'calentador','calentador para areas amplias de gas color gris oscuro',500);
 
 
+
+
+
+___15 consultas
+
+1 SELECT *from clientes
+
+2 SELECT *from clientes  order by ID_cliente
+
+3 SELECT count(*) from clientes;
+
+4 SELECT *from equipos  where precio_base < 500;
+
+5 SELECT *from equipos where nombre like 'n%'; 
+
+6 SELECT *from equipos where nombre like 'm%';
+
+7 Select count(*) from equipos;
+
+8 Select * from rentas where  estado=0;
+
+9 select count(*) from rentas where estado=0;
+
+10 select sum(importe) from rentas where estado=0;
+
+11 select * from rentas  where estado=0 order by Fecha_Hora_Reg desc;
+
+12 select nombre,descripcion,precio_base,id_inv,cant_disp from equipos e, inventarios i where i.id_inv = e.inventario;  
+
+13 select sum(cant_disp) from equipos,inventarios where  equipos.inventario = inventarios.id_inv; 
+
+14 SELECT * from inventarios where  last_update = now();
+
+15 Select count(*) from rentas r, clientes c where c.nombre = 'Ramses' and r.id_cliente = c.ID_cliente;

@@ -55,7 +55,7 @@ public class application{
   
        if(option == 1){
           System.out.println("Escribe tu usuario:");username = in.next();
-          System.out.println("escribe la contraseña:"); contrasena = in.next();
+          System.out.println("Escribe tu contraseña:"); contrasena = in.next();
                 
          user = new User(username,contrasena);
          if(user.log()== true)
@@ -74,7 +74,7 @@ public class application{
        }else{
        
         //JOptionPane.showMessageDialog(Frame,"La opcion que escribiste es incorrecta :("); 
-        JOptionPane.showMessageDialog(jFrame, "La opcion que escribiste es incorrecta :() ");
+        JOptionPane.showMessageDialog(jFrame, "La opcion seleccionada  es incorrecta :() ");
         con.clear();
        }
       
@@ -119,18 +119,19 @@ public class application{
       option = con.validarOptionNumber(console.readLine(), "puedes escribir valores numericos por favor >:(");
        switch (option) {
          case 1:con.clear(); cliente.createRenta();con.clear();break;
-         case 2:con.clear(); System.out.println("no tienes ninguna renta generada");break;
-         case 3:con.clear();cliente.printInformation();break;
+         case 2:con.clear(); cliente.showRental(); con.clear(); break;
+         case 3:con.clear(); cliente.printInformation(); con.clear(); break;
          case 4:
           con.clear();
-          System.out.println("------->Hasta pronto "+cliente.getNombre()+" "+cliente.getApell()+"!>|<!");
-          con.stop(); 
+          System.out.println("------->Hasta pronto "+cliente.getNombre()+" "+cliente.getApell()+"!>|<!\n\n");
+          System.out.println("presione Enter para confirmar");
+          console.readLine();
           break;
       
-         default:JOptionPane.showMessageDialog(jFrame, "la opcion que escribiste es incorrecta :("); con.clear(); break;
+         default:JOptionPane.showMessageDialog(jFrame, "la opcion seleccionada  es incorrecta :("); con.clear(); break;
        }
 
-     } while (true);    
+     } while (option != 4);    
    }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -138,10 +139,11 @@ public class application{
     System.out.println("_________Menu de empleado_________________________");
     System.out.println("|1) Agregar  equipos.                             |");
     System.out.println("|2) Eliminar equipos.                             |");
-    System.out.println("|3) Actualizar y ver inventario.                  |");
-    System.out.println("|4) Actualizar y ver catalogo de equipos.         |");
-    System.out.println("|5) Mostrar historial de cambios de catalogo.     |");
-    System.out.println("|6) Salir                                         |");
+    System.out.println("|3) Registrar el pago del cliente.                |");
+    System.out.println("|4) Mostrar rentas.                               |");
+    System.out.println("|5) Actualizar y ver catalogo de equipos.         |");
+    System.out.println("|6) Mostrar el inventario de equipos.             |");
+    System.out.println("|7) cerra secion                                  |");
     System.out.println("|_________________________________________________|");
     inputM("Escribe la opcion", nameUser+"/>");   
   }
@@ -153,17 +155,25 @@ public class application{
     System.out.println("Hola empleado "+empleado.getId());
     do {
      menuAdmin(empleado.getuserName());
-     option = validOption();
+     option = con.validarOptionNumber(console.readLine(), "Escribe tu respuesta con numero porfavor");
 
      switch (option) {
-      case 1: empleado.addInventory(); break;
-      case 2: System.out.println("eliminar equipo");break;
-      case 3: System.out.println("actualizar inventario"); break;
-      case 4: empleado.changeCatolgy(); break;
-     
+      case 1: con.clear(); empleado.addInventory(); con.clear(); break;
+      case 2: con.clear();System.out.println("esta parte estara programada al finalizar la versio beta"); console.readLine("pulsa Enter para volver al menu");break;
+      case 3: con.clear();empleado.registerPay(); con.clear(); break;
+      case 4: con.clear(); empleado.showRental(); con.clear(); break;
+      case 5: con.clear(); empleado.changeCatolgy(); con.clear(); break;
+      case 6: con.clear();System.out.println("esta parte estara programada al finalizar la versio beta"); console.readLine("pulsa Enter para volver al menu"); break;
+      case 7: con.clear(); System.out.println("hasta pronto Empleado "+empleado.getNombre()+" "+empleado.getApellid_pat());  break;  
       default:JOptionPane.showMessageDialog(jFrame, "la opcion que escribiste es incorrecta :("); con.clear();break;
      }
-    } while (true);
+    } while (option != 7);
+
+   
+    System.out.print("pulsa ENTER para volver al menu principal");
+    console.readLine();
+    con.clear();
+
   }
 
 
@@ -175,19 +185,22 @@ public class application{
       console con = new console();
       //ejecucion de los metodos estaticos
        con.clear();
-
-       try {
-       //creacion del objeto tipoUser
-        User  tipoUser = app.logMessage();
-         if(tipoUser.getTipo().equals("cliente")){
-              con.clear();
-            //ejecucio del programa del cliente
-              app.appRenal(tipoUser.getCustomer());
-       }else{
-          con.clear();
-          app.appAdmin(tipoUser.getEmployer());
-       } 
-      } catch (Exception e) {System.out.println(e);}
+       
+        do {
+          try {
+            //creacion del objeto tipoUser
+             User  tipoUser = app.logMessage();
+              if(tipoUser.getTipo().equals("cliente")){
+                   con.clear();
+                 //ejecucio del programa del cliente
+                   app.appRenal(tipoUser.getCustomer());
+                   con.clear();
+            }else{
+               con.clear();
+               app.appAdmin(tipoUser.getEmployer());
+            } 
+           } catch (Exception e) {System.out.println(e);}
+        } while (true);
        
     }
 }

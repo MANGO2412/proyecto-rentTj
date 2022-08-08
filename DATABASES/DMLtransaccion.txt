@@ -1,7 +1,71 @@
-comprobar si el cliente esta registrado 
+------transaccion principal
+1.pedir y consultador, si esta registrado el cliente
+2.consultar los equipos del catalogo
+3.registra renta  por el cliente
+4.consultar la rentas generadas por el cliente
+
+
+
+------------pedir y consultar los datos registrado por el cliente
+
+------comprobar si el cliente esta registrado 
 
 "select * from users where username='"+userName+"'"+"AND"+" password='"+password+"';"
 
-
-Obtener sus datos del cliente
+-------Obtener sus datos del cliente
 SELECT *from clientes,users where users.id_user = 1 and clientes.ID_cliente = users.cliente;
+
+
+-------si no , registrar el usuario
+insert into clientes() values(1806,'Henry','Murphy',6642143210); 
+insert into users(id_user,tipo,username,password,cliente) values(9,'cliente','bebitoFiu','mich3ll3',1806);
+
+
+-----consultar catalgo
+------selcciona equipo, pedir la cantidad y comprobar si esta disponible
+
+select e.nombre,e.descripcion,e.precio_base,i.cant_disp from equipos e,inventarios i where i.id_inv = e.inventario ;
+
+select e.nombre,e.descripcion,e.precio_base,i.cant_disp  from   equipos e,inventarios i where  nombre like 's%' and i.id_inv = e.inventario;
+select e.nombre,e.descripcion,e.precio_base,i.cant_disp  from   equipos e,inventarios i where  nombre like 'carpa%' and i.id_inv = e.inventario;
+select e.nombre,e.descripcion,e.precio_base,i.cant_disp  from   equipos e,inventarios i where  nombre like 'bocina%' and i.id_inv = e.inventario;
+
+
+
+-----registrar renta para el cliente
+
+1)el cliente pide los siguientes equipos
+mesa , 2
+sillas, 24
+
+insert into rentas(id_renta,id_cliente,fecha_entr,fecha_dev,cantidad_equipos,importe,direccion,estado,dias_renta,Fecha_Hora_Reg) 
+values(2045,1806,'2020-08-08','2020-08-09',2,920,'col mexico lindo, calle matamorros,  casa 12',0,1,now());
+
+
+mesa
+insert into rent_equip() values(2118,2045,2,2,100,200);
+update inventarios set cant_disp=981,cant_rent=23 where id_inv=1011;
+
+silla
+insert into rent_equip() values(2119,2045,3,24,30,720);
+update inventarios set cant_disp=782,cant_rent=218 where id_inv=1012;
+
+
+
+
+-----------mostra la nueva renta y la rentas generadas para el usuario;
+SELECT *from rentas,clientes where nombre= "Henry" and id_cliente = ID_cliente;
+
+
+---mostrar las rentas pendientes para la empresa
+select *from rentas where estado=0;
+
+
+
+
+
+
+
+
+
+

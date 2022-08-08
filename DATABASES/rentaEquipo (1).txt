@@ -22,7 +22,7 @@ create table  users(
   id_user smallint primary key auto_increment,
   tipo varchar(20) not null,
   username varchar(20) not null,
-  password varchar(10) not null,
+  password varchar(8) not null,
   empleado mediumint,
   cliente mediumint
 );
@@ -41,8 +41,9 @@ references  clientes(ID_cliente);
 create table rentas(
   id_renta int primary key,
   id_cliente mediumint not null,
-  fecha_entr  time not null,
-  fecha_dev   time not null,
+  fecha_entr  date not null,
+  fecha_dev   date not null,
+  cantidad_equipos  smallint not null,
   importe double not null ,
   direccion varchar (100) not null,
   cantid_pago  double ,
@@ -61,7 +62,7 @@ references clientes(ID_cliente);
 
 ---------------Tabla Inventarios
 create table inventarios(
-    id_inv smallint primary key,
+    id_inv mediumint primary key,
      cant_disp smallint,
      cant_rent smallint,
      total smallint not null,
@@ -74,9 +75,9 @@ create table inventarios(
 ---------------Tabla Equipos
 create table equipos(
    id_equipo smallint  primary key,
-   inventario smallint not null,
-   nombre varchar(60) not null,
-   descripcion varchar(200) not null,
+   inventario mediumint not null,
+   nombre varchar(30) not null,
+   descripcion varchar(500) not null,
    precio_base double not null
 );
 
